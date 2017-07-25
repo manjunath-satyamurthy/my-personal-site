@@ -1,21 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+
+function Navbutton(props){
+  if (props.active) {
+    return <a href={props.url} className="active">{ props.pagename }</a>
+  }
+  return <a href={props.url}>{ props.pagename }</a>
+}
+
+
+class Sidebar extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <div className="menu">
+        <Navbutton url="/home" pagename="Home" active={true}/>
+        <Navbutton url="/technologies" pagename="Technologies" />
+        <Navbutton url="/work-history" pagename="Work History" />
+        <Navbutton url="/education" pagename="Education" />
+        <Navbutton url="/projects" pagename="Projects" />
+        <Navbutton url="/resume" pagename="Resume" />
+        <Navbutton url="/blog" pagename="Blog" />
+        <Navbutton url="/contact-me" pagename="Contact me" />
+        <Navbutton url="/photos" pagename="Photos" />
+        <Navbutton url="/credits" pagename="Credits" />
+      </div> 
     );
   }
 }
 
-export default App;
+
+class App extends Component {
+  render () {
+    return (
+      <div>
+        <Sidebar />
+        hello how are you ?
+      </div>
+    )
+  }
+}
+
+export default App
