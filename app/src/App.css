@@ -17,6 +17,10 @@
     text-decoration: none;
 }
 
+.menu a, .menu a:hover, .menu a:active, .menu a:visited, .menu a:focus {
+    text-decoration:none;
+}
+
 .menu a:hover {
     background-color: #34495e;
 }
