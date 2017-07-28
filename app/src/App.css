@@ -29,3 +29,36 @@
     background-color: #009688;
     color: white;
 }
+
+.menu a {
+  outline: none;
+}
+
+.center {
+    text-align: center;
+}
+
+.welcome-text {
+    text-align: justify;
+    text-justify: inter-word
+}
+
+.padded-div {
+    margin: 0 15% 0 15%;
+}
+
+#profile-photo {
+    display: block;
+    margin: 50px auto;
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    border: solid 7px #607D8B;
+
+}
+
+.profile-links {
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
