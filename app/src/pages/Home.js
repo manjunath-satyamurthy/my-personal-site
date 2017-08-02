@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 class ProfilePhoto extends Component {
   render () {
     return (
-      <img src={this.props.profileImgURL} id={this.props.photoType}/>
+      <img alt="" src={this.props.profileImgURL} id={this.props.photoType}/>
     )
   }
 }
@@ -37,15 +37,17 @@ class TextDescription extends Component {
 class ProfileLinks extends Component {
   render () {
     return (
-      <table className="profile-links" align="center">
-        <tr>
-          <td><a target="_blank" href="https://github.com/manjunath-satyamurthy"><img width="40" src="/media/github.png" /></a></td>
-          <td><a target="_blank" href="https://stackoverflow.com/users/3536784/manjunath-satyamurthy"><img width="40" src="/media/stackoverflow.svg" /></a></td>
-          <td><a target="_blank" href="https://www.facebook.com/manjunathsatyamurthy"><img width="40" src="/media/facebook.png" /></a></td>
-          <td><a target="_blank" href="https://plus.google.com/+ManjunathSatyamurthy"><img width="40" src="/media/google-plus.gif" /></a></td>
-          <td><a target="_blank" href="https://www.linkedin.com/in/manjunath-satyamurthy-a4408575/"><img width="40" src="/media/linked-in.png" /></a></td>
-          <td><a target="_blank" href="https://twitter.com/ManjunathSatya"><img width="40" src="/media/twitter.png" /></a></td>
-        </tr>
+      <table className="profile-links">
+        <tbody>
+          <tr>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://github.com/manjunath-satyamurthy"><img alt="" width="40" src="/media/github.png" /></a></td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/users/3536784/manjunath-satyamurthy"><img alt="" width="40" src="/media/stackoverflow.svg" /></a></td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/manjunathsatyamurthy"><img alt="" width="40" src="/media/facebook.png" /></a></td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://plus.google.com/+ManjunathSatyamurthy"><img alt="" width="40" src="/media/google-plus.gif" /></a></td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/manjunath-satyamurthy-a4408575/"><img alt="" width="40" src="/media/linked-in.png" /></a></td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/ManjunathSatya"><img alt="" width="40" src="/media/twitter.png" /></a></td>
+          </tr>
+        </tbody>
       </table>
     )
   }
