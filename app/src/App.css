@@ -49,15 +49,69 @@
 #profile-photo {
     display: block;
     margin: 50px auto;
-    width: 25%;
-    height: 25%;
+    width: 350px;
+    height: 350px;
     border-radius: 50%;
     border: solid 7px #607D8B;
-
+    object-fit: cover;
 }
 
 .profile-links {
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
+}
+
+
+.right-float {
+    margin-top: 10px;
+    margin-left: 5px;
+    float: right;
+}
+
+.themed-btn {
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #009688;
+    color: white;
+    padding: 10px 15px;
+}
+
+.editable-photo {
+    text-align: center;
+}
+
+#upload-btn {
+    padding: 0px;
+    font-size: 12px;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    margin: 0 auto;
+}
+
+#description-input {
+    width: 100%;
+}
+
+#login-form {
+    margin-top: 20%;
+    text-align: center;
+}
+
+.input-form {
+    margin-bottom: 15px;
+}
+
+.input-form p {
+    display: inline;
+}
+
+.input-form input {
+    display: inline;
+}
+
+.form-submit-btn {
+    margin-top: 10px;
 }

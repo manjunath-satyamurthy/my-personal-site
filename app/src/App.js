@@ -6,6 +6,10 @@ import Home from "./pages/Home.js";
 import WorkHistory from "./pages/WorkHistory.js";
 import Education from "./pages/Education.js";
 import Technologies from "./pages/Technologies.js";
+import Projects from "./pages/Projects.js";
+import Photos from "./pages/Photos.js";
+import ContactMe from "./pages/ContactMe.js";
+import Credits from "./pages/Credits.js";
 
 const Navbutton = props => {
   return (
@@ -22,6 +26,7 @@ const Navbutton = props => {
 };
 
 const Sidebar = props => {
+  // let later = <Navbutton url="/blog" pageName="Blog" />
   return (
     <div className="menu">
       <Navbutton url="/" pageName="Home" />
@@ -31,7 +36,6 @@ const Sidebar = props => {
       <Navbutton url="/projects" pageName="Projects" />
       <Navbutton url="/resume" pageName="Resume" />
       <Navbutton url="/photos" pageName="Photos" />
-      <Navbutton url="/blog" pageName="Blog" />
       <Navbutton url="/contact-me" pageName="Contact me" />
       <Navbutton url="/credits" pageName="Credits" />
     </div>
@@ -40,7 +44,7 @@ const Sidebar = props => {
 
 const Inputs = props => {
   return (
-    <div>
+    <div className="input-form">
       <p>
         {props.label}
       </p>
@@ -61,8 +65,8 @@ class Login extends Component {
     this.onValueChange = this.onValueChange.bind(this);
     this.state = {
       username: "manju",
-      password: "password",
-      loginSuccessful: false
+      password: "Qwerty1.",
+      isLoggedIn: LocalStorage.isLoggedIn()
     };
   }
 
@@ -87,13 +91,14 @@ class Login extends Component {
       .then(res => {
         if (res.ok) {
           return res.json();
+        } else {
+          throw Error(res.statusText);
         }
       })
       .then(json => {
-        this.setState({
-          loginSuccessful: true
-        });
-        console.log(json);
+        window.localStorage.setItem("isLoggedIn", true);
+        window.localStorage.setItem("username", json.username);
+        this.setState({ isLoggedIn: true });
       })
       .catch(err => {
         console.log(err);
@@ -109,37 +114,67 @@ class Login extends Component {
   }
 
   render() {
-    let isLoggedIn = this.state.loginSuccessful;
-
+    let isLoggedIn = this.state.isLoggedIn;
     if (!isLoggedIn) {
       return (
-        <div>
+        <div id="login-form">
           <Inputs
-            label="Username"
+            label="Username : "
             inputType="text"
             inputName="username"
             inputValue={this.state.username}
             onValueChange={this.onValueChange}
           />
           <Inputs
-            label="Password"
+            label="Password : "
             inputType="password"
             inputName="password"
             inputValue={this.state.password}
             onValueChange={this.onValueChange}
           />
+          <div className="form-submit-btn">
           <input
+            className="themed-btn"
             type="button"
             onClick={this.onClickLogin}
             name="login"
             value="Login"
           />
+          </div>
         </div>
       );
     } else {
       return <Redirect to="/" />;
     }
   }
+}
+
+class LocalStorage {
+  static isLoggedIn = () => {
+    return localStorage.getItem("isLoggedIn")
+      ? JSON.parse(localStorage.getItem("isLoggedIn"))
+      : false;
+  };
+  static username = () => {
+    return localStorage.getItem("username")
+      ? localStorage.getItem("username")
+      : null;
+  };
+  static shouldHomepageLoad = () => {
+    return localStorage.getItem("shouldHomepageLoad")
+      ? JSON.parse(localStorage.getItem("shouldHomepageLoad"))
+      : true;
+  };
+  static profileImageURL = () => {
+    return localStorage.getItem("profileImageURL")
+      ? localStorage.getItem("profileImageURL")
+      : null;
+  };
+  static description = () => {
+    return localStorage.getItem("description")
+      ? localStorage.getItem("description")
+      : null;
+  };
 }
 
 class Main extends Component {
@@ -151,12 +186,89 @@ class Main extends Component {
         <Route exact path="/work-history" component={WorkHistory} />
         <Route exact path="/education" component={Education} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/projects" component={Projects} />
+        <Route exact path="/photos" component={Photos} />
+        <Route exact path="/contact-me" component={ContactMe} />
+        <Route exact path="/credits" component={Credits} />
+      </div>
+    );
+  }
+}
+
+class ControlButtons extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: LocalStorage.isLoggedIn()
+    };
+    this.onLogoutClick = this.onLogoutClick.bind(this);
+  }
+
+  onLogoutClick(e) {
+    fetch("http://localhost:8000/logout", {
+      credentials: "include"
+    }).then(res => {
+      if (res.ok) {
+        localStorage.clear();
+        this.setState({
+          isLoggedIn: LocalStorage.isLoggedIn()
+        });
+      }
+    });
+  }
+
+  render() {
+    let edit = null;
+    let save = null;
+    let logout = null;
+
+    if (this.state.isLoggedIn) {
+      logout = (
+        <input
+          className="themed-btn right-float"
+          id="logout-btn"
+          type="button"
+          value="Logout"
+          onClick={this.onLogoutClick}
+        />
+      );
+      if (!this.props.isEdited) {
+        edit = (
+          <input
+            className="themed-btn right-float"
+            id="edit-btn"
+            type="button"
+            value="Edit"
+            onClick={this.props.onEditClick}
+          />
+        );
+      }
+      if (this.props.isEdited) {
+        save = (
+          <input
+            className="themed-btn right-float"
+            id="save-btn"
+            type="button"
+            value="Save"
+            onClick={this.props.onSaveClick}
+          />
+        );
+      }
+    }
+    return (
+      <div className="control-buttons">
+        {logout} {edit} {save}
+        <br/>
       </div>
     );
   }
 }
 
 class App extends Component {
+  componentWillMount () {
+    console.log("Page Reloading, Clearing LocalStorage")
+    localStorage.clear()
+  }
   render() {
     return (
       <div>
@@ -168,3 +280,5 @@ class App extends Component {
 }
 
 export default App;
+export { LocalStorage };
+export { ControlButtons };

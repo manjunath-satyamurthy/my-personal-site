@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { ControlButtons } from "../App";
 
 class WorkHistory extends Component {
-  render () {
-    return <p> Tesa Scribos Gmbh </p>
-  }
+	render() {
+		return (
+			<div className="padded-div">
+				<ControlButtons />
+				<p> Tesa Scribos Gmbh </p>
+			</div>
+		);
+	}
 }
 
-export default WorkHistory
+export default WorkHistory;
