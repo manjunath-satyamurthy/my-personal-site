@@ -5,8 +5,8 @@ import { ControlButtons } from "../App";
 
 const TableHeaders = (props) => {
 	let heads = []
-	props.header.forEach(head => {
-		heads.push(<th key={head}>{head}</th>)
+	props.header.forEach(row => {
+		heads.push(<th key={row.head} colSpan={row.colspan}>{row.head}</th>)
 	})
 	return (
 		<tr>
@@ -18,7 +18,7 @@ const TableHeaders = (props) => {
 const TableRow = (props) => {
 	let rows = [];
 	props.body.forEach(row => {
-		rows.push(<td key={row}>{row}</td>)
+		rows.push(<td key={row.data} colSpan={row.colspan}>{row.data}</td>)
 	}) 
 	return (
 		<tr>
@@ -30,7 +30,7 @@ const TableRow = (props) => {
 class InfoTable extends Component {
 	render() {
 		return (
-			<div>
+			<div className="clear">
 				<table className="info-table">
 					<thead>{this.props.theaders}</thead>
 					<tbody>{this.props.tbody}</tbody>
@@ -41,17 +41,18 @@ class InfoTable extends Component {
 }
 
 class Technologies extends Component {
+
 	render() {
 		let header;
 		let body;
 
-		header = <TableHeaders header={[1, 2, 3, 4]} />
-		body = <TableRow body={['how', 'are', 'your', 'blaa']} />
+		header = <TableHeaders header={[{head: 1, colspan: null}, {head: 2, colspan: null}, {head: 3, colspan: null}, {head: 4, colspan: null}]} />
+		body = <TableRow body={[{data: 'how', colspan: null}, {data: 'are', colspan: null}, {data: 'your', colspan: null}, {data: 'blaa', colspan: null}]} />
+		
 		return (
 			<div className="padded-div">
 				<ControlButtons />
-				<InfoTable theaders={header} tbody={body}/>
-				<p> I am fine </p>
+				<InfoTable theaders={header} tbody={body} />
 			</div>
 		);
 	}

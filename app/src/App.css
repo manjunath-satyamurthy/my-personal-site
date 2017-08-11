@@ -1,3 +1,8 @@
+::selection {
+  background: #009688;
+  color: white;
+}
+
 .menu {
     width: 200px;
     background-color: #2c3e50;
@@ -114,4 +119,42 @@
 
 .form-submit-btn {
     margin-top: 10px;
+}
+
+.clear {
+    clear: both;
+}
+
+.info-table {
+    margin-top:40px;
+    width: 100%;
+    border: none;
+    box-shadow: 0px 5px 10px 3px #2c3e50; 
+    border-collapse:collapse;
+}
+
+.info-table tbody tr td, .info-table thead tr th {
+    padding: 10px;
+    border: 0;
+    border-collapse: collapse;
+}
+
+.info-table thead tr th {
+    background-color: #607D8B;
+    text-align: left;
+    color: white;
+}
+
+.info-table tbody tr td {
+    border-right: 1px solid #90A4AE;
+    border-bottom: 1px solid #90A4AE;
+    /*background-color: white;*/
+}
+
+.info-table tbody tr td:last-child {
+    border-right: none;
+}
+
+.info-table tbody tr:last-child td {
+    border-bottom: 2px solid #2c3e50;
 }
