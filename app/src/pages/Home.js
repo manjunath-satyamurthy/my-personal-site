@@ -212,10 +212,12 @@ class Home extends Component {
       })
         .then(res => {
           if (res.ok) {
+            console.log("here")
             return res.json();
           }
         })
         .then(json => {
+          console.log(json)
           localStorage.description = json.description;
           localStorage.profileImageURL =
             "http://127.0.0.1:8000" + json.profile_photo_url;

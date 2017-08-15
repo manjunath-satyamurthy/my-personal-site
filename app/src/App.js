@@ -175,6 +175,16 @@ class LocalStorage {
       ? localStorage.getItem("description")
       : null;
   };
+  static shouldTechnologiesLoad = () => {
+    return localStorage.getItem("shouldTechnologiesLoad")
+      ? JSON.parse(localStorage.getItem("shouldTechnologiesLoad"))
+      : true;
+  };
+  static technologies = () => {
+    return localStorage.technologies
+      ? JSON.parse(localStorage.technologies)
+      : null
+  }
 }
 
 class Main extends Component {

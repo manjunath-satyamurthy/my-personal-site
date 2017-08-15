@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ControlButtons } from "../App";
+import { LocalStorage, ControlButtons } from "../App";
 
 
 
@@ -42,19 +42,63 @@ class InfoTable extends Component {
 
 class Technologies extends Component {
 
+	constructor(props){
+		super(props)
+		this.state = {
+			shouldPageLoad: LocalStorage.shouldTechnologiesLoad(),
+		}
+	}
+
 	render() {
 		let header;
-		let body;
+		let body = [];
 
-		header = <TableHeaders header={[{head: 1, colspan: null}, {head: 2, colspan: null}, {head: 3, colspan: null}, {head: 4, colspan: null}]} />
-		body = <TableRow body={[{data: 'how', colspan: null}, {data: 'are', colspan: null}, {data: 'your', colspan: null}, {data: 'blaa', colspan: null}]} />
-		
-		return (
-			<div className="padded-div">
-				<ControlButtons />
-				<InfoTable theaders={header} tbody={body} />
-			</div>
-		);
+		if (this.state.shouldPageLoad){
+      fetch("http://localhost:8000/get_technologies/", {
+        method: "GET"
+      })
+        .then(res => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then(json => {
+          console.log(JSON.parse(json))
+          localStorage.technologies = json;
+          localStorage.shouldTechnologiesLoad = false;
+          this.setState({
+            technologies: LocalStorage.technologies(),
+            shouldPageLoad: LocalStorage.shouldTechnologiesLoad()
+          });
+        });
+		}
+
+		// header = 
+		// body = <TableRow body={[{data: category, colspan: 2}]} key={category} />
+		let technologies = this.state.technologies
+		for (let category in technologies){
+			body.push(<TableHeaders header={[{head: category, colspan: 2}]} key={category} />)
+			for (let expertise in technologies[category]){
+				let particulars = technologies[category][expertise].join(", ") 
+				body.push(
+					<TableRow 
+					body={[{data: expertise, colspan: 1}, {data: particulars, colspan: 1}]} 
+					key={particulars} />
+				)
+			}
+		}
+
+		if (!this.state.shouldPageLoad){
+			return (
+				<div className="padded-div">
+					<ControlButtons />
+					<InfoTable theaders={header} tbody={body} />
+				</div>
+			);
+		} else {
+			return <p>Loading ...</p>
+		}
+
 	}
 }
 
