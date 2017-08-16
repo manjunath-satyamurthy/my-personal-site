@@ -37,6 +37,27 @@
 
 .menu a {
   outline: none;
+
+}
+
+.menu a:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 180px;
+    margin-top: -13px;
+    left: 5%;
+    border-bottom: 1px solid #455A64;
+}
+
+.menu a:first-child:before, .menu a.active:before {
+    content: '';
+    border: none;
+}
+
+.menu a.active + a:before {
+    content: '';
+    border: none;
 }
 
 .center {
@@ -148,7 +169,6 @@
 .info-table tbody tr td {
     border-right: 1px solid #90A4AE;
     border-bottom: 1px solid #90A4AE;
-    /*background-color: white;*/
 }
 
 .info-table tbody tr td:last-child {
@@ -157,4 +177,9 @@
 
 .info-table tbody tr:last-child td {
     border-bottom: 2px solid #2c3e50;
+}
+
+.info-table thead th.main-table-header {
+    background-color: #2c3e50;
+    text-align: center;
 }

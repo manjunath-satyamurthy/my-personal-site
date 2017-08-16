@@ -183,8 +183,29 @@ class LocalStorage {
   static technologies = () => {
     return localStorage.technologies
       ? JSON.parse(localStorage.technologies)
-      : null
-  }
+      : null;
+  };
+  static shouldWorkHistoryLoad = () => {
+    return localStorage.shouldWorkHistoryLoad
+      ? JSON.parse(localStorage.shouldWorkHistoryLoad)
+      : true;
+  };
+  static workHistory = () => {
+    return localStorage.workHistory
+      ? JSON.parse(localStorage.workHistory)
+      : null;
+  };
+  static education = () => {
+    return localStorage.education
+      ? JSON.parse(localStorage.education)
+      : null;
+  };
+  static shouldEducationLoad = () => {
+    return localStorage.shouldEducationLoad
+      ? JSON.parse(localStorage.shouldEducationLoad)
+      : true;
+  };
+
 }
 
 class Main extends Component {
