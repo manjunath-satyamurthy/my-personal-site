@@ -204,20 +204,16 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.state.shouldPageLoad);
-
     if (this.state.shouldPageLoad) {
       fetch("http://localhost:8000/get_home_page/", {
         method: "GET"
       })
         .then(res => {
           if (res.ok) {
-            console.log("here")
             return res.json();
           }
         })
         .then(json => {
-          console.log(json)
           localStorage.description = json.description;
           localStorage.profileImageURL =
             "http://127.0.0.1:8000" + json.profile_photo_url;

@@ -10,6 +10,7 @@ import Projects from "./pages/Projects.js";
 import Photos from "./pages/Photos.js";
 import ContactMe from "./pages/ContactMe.js";
 import Credits from "./pages/Credits.js";
+import Resume from "./pages/Resume.js";
 
 const Navbutton = props => {
   return (
@@ -151,33 +152,33 @@ class Login extends Component {
 
 class LocalStorage {
   static isLoggedIn = () => {
-    return localStorage.getItem("isLoggedIn")
-      ? JSON.parse(localStorage.getItem("isLoggedIn"))
+    return localStorage.isLoggedIn
+      ? JSON.parse(localStorage.isLoggedIn)
       : false;
   };
   static username = () => {
-    return localStorage.getItem("username")
-      ? localStorage.getItem("username")
+    return localStorage.username
+      ? localStorage.username
       : null;
   };
   static shouldHomepageLoad = () => {
-    return localStorage.getItem("shouldHomepageLoad")
-      ? JSON.parse(localStorage.getItem("shouldHomepageLoad"))
+    return localStorage.shouldHomepageLoad
+      ? JSON.parse(localStorage.shouldHomepageLoad)
       : true;
   };
   static profileImageURL = () => {
-    return localStorage.getItem("profileImageURL")
-      ? localStorage.getItem("profileImageURL")
+    return localStorage.profileImageURL
+      ? localStorage.profileImageURL
       : null;
   };
   static description = () => {
-    return localStorage.getItem("description")
-      ? localStorage.getItem("description")
+    return localStorage.description
+      ? localStorage.description
       : null;
   };
   static shouldTechnologiesLoad = () => {
-    return localStorage.getItem("shouldTechnologiesLoad")
-      ? JSON.parse(localStorage.getItem("shouldTechnologiesLoad"))
+    return localStorage.shouldTechnologiesLoad
+      ? JSON.parse(localStorage.shouldTechnologiesLoad)
       : true;
   };
   static technologies = () => {
@@ -205,6 +206,16 @@ class LocalStorage {
       ? JSON.parse(localStorage.shouldEducationLoad)
       : true;
   };
+  static shouldProjectLoad = () => {
+    return localStorage.shouldProjectLoad
+      ? JSON.parse(localStorage.shouldProjectLoad)
+      : true;
+  };
+  static project = () => {
+    return localStorage.project
+      ? JSON.parse(localStorage.project)
+      : null;
+  };
 
 }
 
@@ -218,6 +229,7 @@ class Main extends Component {
         <Route exact path="/education" component={Education} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/projects" component={Projects} />
+        <Route exact path="/resume" component={Resume} />
         <Route exact path="/photos" component={Photos} />
         <Route exact path="/contact-me" component={ContactMe} />
         <Route exact path="/credits" component={Credits} />

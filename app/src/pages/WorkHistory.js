@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LocalStorage, ControlButtons } from "../App";
+import { LocalStorage } from "../App";
 import { TableHeaders, TableRow, InfoTable } from "../Components";
 
 class WorkHistory extends Component {
@@ -40,9 +40,15 @@ class WorkHistory extends Component {
 		let workHistory = this.state.workHistory;
 
 		for (let i in workHistory) {
+			let companyLink = (
+				<a target="_blank" rel="noopener noreferrer" href={workHistory[i].URL}>
+					{workHistory[i].Company}
+				</a>
+			);
+
 			body.push(
 				<TableHeaders
-					header={[{ head: workHistory[i].Company, colspan: 2 }]}
+					header={[{ head: companyLink, colspan: 2 }]}
 					key={workHistory[i].Company}
 				/>
 			);
@@ -78,7 +84,6 @@ class WorkHistory extends Component {
 		if (!this.state.shouldPageLoad) {
 			return (
 				<div className="padded-div">
-					<ControlButtons />
 					<InfoTable theaders={header} tbody={body} />
 				</div>
 			);

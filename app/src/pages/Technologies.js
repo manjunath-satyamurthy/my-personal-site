@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LocalStorage, ControlButtons } from "../App";
+import { LocalStorage } from "../App";
 import { TableHeaders, TableRow, InfoTable } from "../Components";
 
 class Technologies extends Component {
@@ -64,7 +64,6 @@ class Technologies extends Component {
 		if (!this.state.shouldPageLoad) {
 			return (
 				<div className="padded-div">
-					<ControlButtons />
 					<InfoTable theaders={header} tbody={body} />
 				</div>
 			);

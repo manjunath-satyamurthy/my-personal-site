@@ -4,3 +4,8 @@ body {
   font-family: sans-serif;
   background-color: #ECEFF1;
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}

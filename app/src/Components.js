@@ -48,6 +48,18 @@ const InfoTable = props => {
 	);
 }
 
+const Modal = props => {
+	return (
+		<div id={props.id} className={props.className}>
+		  <span className="close">&times;</span>
+		  <div className="modal-content">
+			  {props.modalContent}
+		  </div>
+		</div>
+	)
+}
+
 export { TableHeaders };
 export { TableRow };
 export { InfoTable };
+export { Modal };
