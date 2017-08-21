@@ -47,7 +47,13 @@ class Photos extends Component {
 				/>
 			);
 		}
-		let x = <img src="http://localhost:8000/media/photos/calvinhobbes.jpg" />
+		let x = (
+			<div>
+				<p className="left-arrow"></p>
+				<img src="http://localhost:8000/media/photos/calvinhobbes.jpg" />
+				<p className="right-arrow"></p>
+			</div>
+		)
 		if (!this.shouldPageLoad) {
 			return (
 				<div className="padded-div">

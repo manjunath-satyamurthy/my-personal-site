@@ -252,8 +252,7 @@ object {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: black;
-    opacity: 0.9;
+    background-color: rgba(0,0,0, 0.8);
 }
 
 .modal .close {
@@ -273,15 +272,22 @@ object {
     cursor: pointer;
 }
 
-
 .modal-content {
+    position: static;
     height: 80%;
-    margin: 0 auto;
-    display: block;
     width: 100%;
 }
 
-/* Caption of Modal Image */
+.modal-content div {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.modal-content div p, .modal-content div img {
+    display: inline;
+}
+
 #caption {
     margin: auto;
     display: block;
@@ -293,28 +299,10 @@ object {
     height: 150px;
 }
 
-/* Add Animation */
-.modal-content, #caption {    
-    -webkit-animation-name: zoom;
-    -webkit-animation-duration: 0.6s;
-    animation-name: zoom;
-    animation-duration: 0.6s;
+p.left-arrow {
+    content: "&#9668"
 }
 
-@-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)} 
-    to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-    from {transform:scale(0)} 
-    to {transform:scale(1)}
-}
-
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-    .modal-content {
-        width: 100%;
-    }
+p.right-arrow {
+    content: "&#9658"
 }
