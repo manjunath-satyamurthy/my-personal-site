@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 
 
 const TableHeaders = props => {
@@ -48,15 +48,47 @@ const InfoTable = props => {
 	);
 }
 
-const Modal = props => {
-	return (
-		<div id={props.id} className={props.className}>
-		  <span className="close">&times;</span>
-		  <div className="modal-content">
-			  {props.modalContent}
-		  </div>
-		</div>
-	)
+class Modal extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			showModal: this.props.name === this.props.showModalName,
+		}
+		this.closeButtonClicked = this.closeButtonClicked.bind(this)
+	}
+
+	componentWillReceiveProps(nextProps){
+		if (this.props.name === nextProps.showModalName){
+			this.setState({
+				showModal: true,
+			})
+		} else {
+			this.setState({
+				showModal: false,
+			})
+		}
+	}
+
+	closeButtonClicked = e => {
+		this.setState({
+			showModal: false
+		})
+	}
+
+	render() {
+		if (this.state.showModal){
+			return (
+				<div id={this.props.id} className={this.props.className}>
+				  <span className="close" onClick={this.closeButtonClicked}>&times;</span>
+				  <div className="modal-content">
+					  {this.props.modalContent}
+				  </div>
+				</div>
+			)
+		} else {
+			return null;
+		}
+	}
 }
 
 export { TableHeaders };
