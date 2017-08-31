@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { ControlButtons } from "../App";
 import { Modal } from "../Components";
 
+
+
 class TaggedPhotos extends Component {
 	onClick = () => {
 		this.props.setModalName(this.props.url);
@@ -22,6 +24,16 @@ class TaggedPhotos extends Component {
 
 
 class PhotoModal extends Component {
+	componentWillMount(){
+		console.log("mounted PhotoModal")
+		document.addEventListener("keydown", this.onKeyDown, false);
+	}
+
+	componentWillUnmount(){
+		console.log("unmounted PhotoModal")
+		document.removeEventListener("keydown", this.onKeyDown, false);
+	}
+
 	onLeftClick = () => {
 		this.props.setModalName(this.props.previousPhoto);
 	};
@@ -30,13 +42,25 @@ class PhotoModal extends Component {
 		this.props.setModalName(this.props.nextPhoto);
 	};
 
+	onKeyDown = (e) => {
+		if (e.keyCode === 37){
+			this.props.setModalName(this.props.previousPhoto);
+		}
+		else if (e.keyCode === 39){
+			this.props.setModalName(this.props.nextPhoto);
+		}
+		else if (e.keyCode === 27){
+			this.props.setModalName(null);
+		}
+ 	}
+
 	render() {
 		return (
 			<div>
 				<p className="left-arrow" onClick={this.onLeftClick}>
 					&lt;
 				</p>
-				<img src={this.props.currentPhoto} alt="Failed to Load" />
+					<img src={this.props.currentPhoto} alt="Failed to Load" key={this.props.currentPhoto+this.props.nextPhoto} />
 				<p className="right-arrow" onClick={this.onRightClick}>
 					&gt;
 				</p>
@@ -55,6 +79,7 @@ class Photos extends Component {
 			showModalName: null
 		};
 		this.setModalName = this.setModalName.bind(this);
+
 	}
 
 	setModalName = url => {
@@ -62,6 +87,7 @@ class Photos extends Component {
 			showModalName: url
 		});
 	};
+
 
 	render() {
 		if (this.state.shouldPageLoad) {
@@ -117,7 +143,7 @@ class Photos extends Component {
 					previousPhoto={previousPhoto}
 					setModalName={this.setModalName}
 				/>
-			);
+			);	
 
 			photoModals.push(
 				<Modal

@@ -318,3 +318,23 @@ object {
     text-decoration: none;
     user-select: none;
 }
+
+
+
+.modalview-enter {
+    margin-left: 2000px;
+}
+
+.modalview-enter-active {
+    margin-left: 0px;
+    transition: all 2s ease-in;
+}
+
+.modalview-leave {
+  margin-left: 0px;
+}
+
+.modalview-leave-active {
+  margin-left: -2000px;
+  transition: all 2s ease-in-out;
+}

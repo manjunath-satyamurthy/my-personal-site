@@ -46,45 +46,55 @@ const InfoTable = props => {
 			</table>
 		</div>
 	);
-}
+};
 
 class Modal extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
-			showModal: this.props.name === this.props.showModalName,
-		}
-		this.closeButtonClicked = this.closeButtonClicked.bind(this)
+			showModal: this.props.name === this.props.showModalName
+		};
+		this.closeButtonClicked = this.closeButtonClicked.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps){
-		if (this.props.name === nextProps.showModalName){
+	componentDidMount(){
+		console.log("mounted")
+	}
+
+	componentWillUnmount(){
+		console.log("unmounted")
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.name === nextProps.showModalName) {
 			this.setState({
-				showModal: true,
-			})
+				showModal: true
+			});
 		} else {
 			this.setState({
-				showModal: false,
-			})
+				showModal: false
+			});
 		}
 	}
 
 	closeButtonClicked = e => {
 		this.setState({
 			showModal: false
-		})
-	}
+		});
+	};
 
 	render() {
-		if (this.state.showModal){
+		if (this.state.showModal) {
 			return (
 				<div id={this.props.id} className={this.props.className}>
-				  <span className="close" onClick={this.closeButtonClicked}>&times;</span>
-				  <div className="modal-content">
-					  {this.props.modalContent}
-				  </div>
+					<span className="close" onClick={this.closeButtonClicked}>
+						&times;
+					</span>
+					<div className="modal-content">
+						{this.props.modalContent}
+					</div>
 				</div>
-			)
+			);
 		} else {
 			return null;
 		}
